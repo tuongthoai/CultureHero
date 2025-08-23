@@ -1,8 +1,13 @@
 package com.newing.culture_hero.security;
 
-import com.newing.culture_hero.user.Role;
-import com.newing.culture_hero.user.User;
-import com.newing.culture_hero.user.UserRepository;
+import java.time.Instant;
+import java.util.UUID;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,15 +18,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Instant;
-import java.util.UUID;
-
-import static org.junit.jupiter.api.Assertions.*;
+import com.newing.culture_hero.user.Role;
+import com.newing.culture_hero.user.User;
+import com.newing.culture_hero.user.UserRepository;
 
 @SpringBootTest
 @TestPropertySource(properties = {
-    "spring.datasource.url=jdbc:h2:mem:testdb",
-    "spring.jpa.hibernate.ddl-auto=create-drop"
+        "spring.datasource.url=jdbc:h2:mem:testdb",
+        "spring.jpa.hibernate.ddl-auto=create-drop"
 })
 @Transactional
 class CustomUserDetailsServiceTest {
@@ -66,8 +70,7 @@ class CustomUserDetailsServiceTest {
 
     @Test
     void testLoadUserByUsername_UserNotFound() {
-        assertThrows(UsernameNotFoundException.class, () ->
-                userDetailsService.loadUserByUsername("nonexistent"));
+        assertThrows(UsernameNotFoundException.class, () -> userDetailsService.loadUserByUsername("nonexistent"));
     }
 
     @Test
