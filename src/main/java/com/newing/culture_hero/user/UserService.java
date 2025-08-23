@@ -2,6 +2,7 @@
 package com.newing.culture_hero.user;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,5 +41,17 @@ public class UserService {
 
     public User findByUsername(String username) {
         return userRepository.findByUsername(username).orElse(null);
+    }
+
+    public User findById(UUID userId) {
+        return userRepository.findById(userId).orElse(null);
+    }
+
+    public List<User> findByCompanyId(UUID companyId) {
+        return userRepository.findByCompanyId(companyId);
+    }
+
+    public List<User> findAll() {
+        return userRepository.findAll();
     }
 }

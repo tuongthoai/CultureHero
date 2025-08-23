@@ -113,10 +113,10 @@ class UserServiceTest {
     void testCreateUser_DuplicateUsername() {
         UUID companyId = UUID.randomUUID();
         String username = "duplicateuser";
-        
+
         // Create first user
         userService.createUser(companyId, username, "password123", Role.PARTICIPANT);
-        
+
         // Attempt to create second user with same username should throw exception
         assertThrows(UsernameAlreadyExistsException.class, () -> {
             userService.createUser(companyId, username, "password456", Role.CLIENT_ADMIN);
