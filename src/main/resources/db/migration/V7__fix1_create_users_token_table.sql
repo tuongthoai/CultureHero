@@ -1,0 +1,2 @@
+ALTER TABLE user_tokens
+    ADD COLUMN token_type VARCHAR(20) NOT NULL DEFAULT 'ACCESS';
