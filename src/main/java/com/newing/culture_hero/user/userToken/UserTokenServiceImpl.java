@@ -22,13 +22,13 @@ public class UserTokenServiceImpl implements UserTokenService {
 
     @Override
     public UserToken createAccessToken(User user) {
-        //24h
+        // 24h
         return createToken(user, TokenType.ACCESS, 24);
     }
 
     @Override
     public UserToken createRefreshToken(User user) {
-        //30 days
+        // 30 days
         return createToken(user, TokenType.REFRESH, 24L * 30);
     }
 
@@ -39,11 +39,10 @@ public class UserTokenServiceImpl implements UserTokenService {
 
         UserToken token = new UserToken(
                 user,
-                generateTokenValue(type),  // giá trị token
+                generateTokenValue(type), // giá trị token
                 type,
                 now,
-                expiresAt
-        );
+                expiresAt);
         return userTokenRepository.save(token);
     }
 
@@ -82,6 +81,7 @@ public class UserTokenServiceImpl implements UserTokenService {
     public void deleteTokensByUserAndType(UUID userId, TokenType type) {
         userTokenRepository.deleteByUserIdAndTokenType(userId, type);
     }
+
     private String generateTokenValue(TokenType type) {
         // token ngẫu nhiên an toàn, gắn prefix để dễ nhận diện
         byte[] bytes = new byte[32];
@@ -89,6 +89,5 @@ public class UserTokenServiceImpl implements UserTokenService {
         String random = Base64.getUrlEncoder().withoutPadding().encodeToString(bytes);
         return (type == TokenType.ACCESS ? "acc_" : "ref_") + random;
     }
-
 
 }

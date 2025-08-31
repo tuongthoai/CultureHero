@@ -16,6 +16,7 @@ import java.util.UUID;
 @Service
 public class TaskServiceImpl implements TaskService {
     private final TaskRepository taskRepository;
+
     @Autowired
     public TaskServiceImpl(TaskRepository taskRepository) {
         this.taskRepository = taskRepository;
@@ -53,7 +54,8 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Task updateTask(UUID id, String title, String description, int rewardXp, int rewardCoins, TaskDifficulty difficulty, TaskStatus status) {
+    public Task updateTask(UUID id, String title, String description, int rewardXp, int rewardCoins,
+            TaskDifficulty difficulty, TaskStatus status) {
         Task task = taskRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Task not found: " + id));
 

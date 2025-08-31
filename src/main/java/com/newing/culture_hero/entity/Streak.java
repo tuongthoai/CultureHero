@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
-@Table(name="streaks")
+@Table(name = "streaks")
 public class Streak {
     @Id
     private UUID id;
@@ -16,7 +16,7 @@ public class Streak {
     @JoinColumn(name = "user_id", nullable = false, unique = true)
     private User user;
 
-    @Column(name="count",nullable = false)
+    @Column(name = "count", nullable = false)
     private int count;
 
     @Column(name = "last_login_date", nullable = false)
@@ -24,6 +24,7 @@ public class Streak {
 
     public Streak() {
     }
+
     public Streak(User user) {
         this.id = UUID.randomUUID();
         this.user = user;

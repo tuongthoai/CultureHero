@@ -13,6 +13,7 @@ import java.util.List;
 @RequestMapping("/api/v1/reports")
 public class ReportController {
     private final ReportService reportService;
+
     public ReportController(ReportService reportService) {
         this.reportService = reportService;
     }
@@ -36,6 +37,7 @@ public class ReportController {
     public ResponseEntity<ReportResponse> getCertificateRate() {
         return ResponseEntity.ok(reportService.getCertificateRate());
     }
+
     @GetMapping("/leaderboards")
     public ResponseEntity<List<ReportResponse>> getLeaderboardStats() {
         return ResponseEntity.ok(reportService.getLeaderboardStats());

@@ -27,7 +27,8 @@ public class LoginResponse {
         this.expiresAt = expiresAt;
     }
 
-    public LoginResponse(String accessToken, String username, Role role, String companyId, String issuedAt, String expiresAt) {
+    public LoginResponse(String accessToken, String username, Role role, String companyId, String issuedAt,
+            String expiresAt) {
         this.accessToken = accessToken;
         this.username = username;
         this.role = role;

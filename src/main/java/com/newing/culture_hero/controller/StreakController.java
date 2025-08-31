@@ -12,10 +12,12 @@ import java.util.UUID;
 @RequestMapping("/api/v1/streaks")
 public class StreakController {
     private final StreakService streakService;
+
     @Autowired
     public StreakController(StreakService streakService) {
         this.streakService = streakService;
     }
+
     @GetMapping("/{userId}")
     public ResponseEntity<Streak> getUserStreak(@PathVariable UUID userId) {
         Streak streak = streakService.getUserStreak(userId);

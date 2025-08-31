@@ -6,36 +6,36 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name ="tasks")
+@Table(name = "tasks")
 public class Task {
     @Id
-    @Column(name="id", nullable = false, updatable = false)
+    @Column(name = "id", nullable = false, updatable = false)
     private UUID id;
 
-    @Column(name="title",nullable = false)
-    private  String title;
+    @Column(name = "title", nullable = false)
+    private String title;
 
-    @Column(name="description",columnDefinition = "TEXT")
+    @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
-    @Column(name="reward_xp",nullable = false)
+    @Column(name = "reward_xp", nullable = false)
     private int rewardXp;
 
-    @Column(name="reward_coins",nullable = false)
+    @Column(name = "reward_coins", nullable = false)
     private int rewardCoins;
 
-    @Enumerated(EnumType.STRING)   //
-    @Column(name="difficulty",nullable = false)
+    @Enumerated(EnumType.STRING) //
+    @Column(name = "difficulty", nullable = false)
     private TaskDifficulty difficulty; // EASY, MEDIUM, HARD
 
     @Enumerated(EnumType.STRING)
-    @Column(name="status",nullable = false)
+    @Column(name = "status", nullable = false)
     private TaskStatus status;
 
-    @Column(name="created_at",nullable = false)
+    @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
-    @Column(name="updated_at",nullable = false)
+    @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
 
     public UUID getId() {

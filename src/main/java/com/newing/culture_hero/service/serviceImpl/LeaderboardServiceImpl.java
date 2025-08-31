@@ -11,6 +11,7 @@ import java.util.UUID;
 @Service
 public class LeaderboardServiceImpl implements LeaderboardService {
     private final LeaderBoardRepository leaderBoardRepository;
+
     public LeaderboardServiceImpl(LeaderBoardRepository leaderBoardRepository) {
         this.leaderBoardRepository = leaderBoardRepository;
     }

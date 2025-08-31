@@ -14,10 +14,12 @@ import java.util.UUID;
 @RequestMapping("/api/v1/certificates")
 public class CertificateController {
     private final CertificateService certificateService;
+
     @Autowired
     public CertificateController(CertificateService certificateService) {
         this.certificateService = certificateService;
     }
+
     @PreAuthorize("hasRole('CLIENT_ADMIN')")
     @GetMapping("/all")
     public ResponseEntity<List<CertificateResponse>> getAllCertificates() {
@@ -42,7 +44,8 @@ public class CertificateController {
 
     @PreAuthorize("hasRole('CLIENT_ADMIN')")
     @PostMapping("/{id}/reject")
-    public ResponseEntity<Certificate> rejectCertificate(@PathVariable UUID id, @RequestParam(required = false) String reason) {
+    public ResponseEntity<Certificate> rejectCertificate(@PathVariable UUID id,
+            @RequestParam(required = false) String reason) {
         return ResponseEntity.ok(certificateService.rejectCertificate(id, reason));
     }
 }

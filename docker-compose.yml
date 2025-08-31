@@ -1,18 +1,23 @@
-version: '3.8'
-
 services:
   postgres:
-    image: postgres:16-alpine
+    image: postgres:16.10
     container_name: culturehero-postgres
     environment:
       POSTGRES_DB: culturehero
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
+      # optional but nice to have:
+      PGDATA: /var/lib/postgresql/data/pgdata
     ports:
-      - "5432:5432"
+      - "5432:5432" # change to "5433:5432" if 5432 is busy on Windows
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./init-db:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d culturehero" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     restart: unless-stopped
 
 volumes:

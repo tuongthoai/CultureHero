@@ -25,7 +25,7 @@ public class StreakServiceImpl implements StreakService {
 
     @Override
     public Streak getUserStreak(UUID userId) {
-        User user= userService.findById(userId);
+        User user = userService.findById(userId);
         return streakRepository.findByUser(user)
                 .orElse(new Streak(user));
     }

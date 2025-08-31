@@ -9,7 +9,6 @@ import java.util.UUID;
 
 public interface TaskService {
 
-
     Task createTask(String title, String description, int rewardXp, int rewardCoins, TaskDifficulty difficulty);
 
     List<Task> findAll();
@@ -18,7 +17,8 @@ public interface TaskService {
 
     List<Task> findByStatus(TaskStatus status);
 
-    Task updateTask(UUID id, String title, String description, int rewardXp, int rewardCoins, TaskDifficulty difficulty, TaskStatus status);
+    Task updateTask(UUID id, String title, String description, int rewardXp, int rewardCoins, TaskDifficulty difficulty,
+            TaskStatus status);
 
     void deleteTask(UUID id);
 }

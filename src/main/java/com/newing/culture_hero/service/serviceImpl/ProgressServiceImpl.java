@@ -17,8 +17,9 @@ import java.util.UUID;
 public class ProgressServiceImpl implements ProgressService {
     private final ProgressRepository progressRepository;
     private final UserService userService;
+
     @Autowired
-    public ProgressServiceImpl( ProgressRepository progressRepository,UserService userService) {
+    public ProgressServiceImpl(ProgressRepository progressRepository, UserService userService) {
         this.progressRepository = progressRepository;
         this.userService = userService;
     }
@@ -27,7 +28,8 @@ public class ProgressServiceImpl implements ProgressService {
     @Transactional
     public Progress createProgressForUser(UUID userId) {
         User user = userService.findById(userId);
-        if (user == null) throw new RuntimeException("User not found");
+        if (user == null)
+            throw new RuntimeException("User not found");
         Progress progress = new Progress(user);
         return progressRepository.save(progress);
     }

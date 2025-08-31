@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name="progress")
+@Table(name = "progress")
 public class Progress {
     @Id
     private UUID id;
@@ -16,10 +16,10 @@ public class Progress {
     @JoinColumn(name = "user_id", nullable = false, unique = true)
     private User user;
 
-    @Column(name="xp",nullable = false)
-    private  int xp;
+    @Column(name = "xp", nullable = false)
+    private int xp;
 
-    @Column(name="level",nullable = false)
+    @Column(name = "level", nullable = false)
     private int level;
 
     @Column(name = "streak", nullable = false)
@@ -37,7 +37,8 @@ public class Progress {
     public Progress() {
     }
 
-    public Progress(UUID id, User user, int xp, int level, int streak, LocalDateTime lastStreakDate, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public Progress(UUID id, User user, int xp, int level, int streak, LocalDateTime lastStreakDate,
+            LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.user = user;
         this.xp = xp;
@@ -47,6 +48,7 @@ public class Progress {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
+
     public Progress(User user) {
         this.id = UUID.randomUUID();
         this.user = user;

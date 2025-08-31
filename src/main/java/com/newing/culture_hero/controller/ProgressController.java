@@ -34,14 +34,16 @@ public class ProgressController {
         return progress.map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+
     // (Admin) → cộng XP cho user
     @PreAuthorize("hasAnyRole('CONSULTANT_ADMIN','CLIENT_ADMIN')")
     @PostMapping("/{userId}/add-xp")
     public ResponseEntity<Progress> addXp(@PathVariable UUID userId,
-                                          @RequestParam int amount) {
+            @RequestParam int amount) {
         Progress progress = progressService.addXp(userId, amount);
         return ResponseEntity.ok(progress);
     }
+
     // (Admin) → ép thăng cấp cho user
     @PreAuthorize("hasAnyRole('CONSULTANT_ADMIN','CLIENT_ADMIN')")
     @PostMapping("/{userId}/level-up")
@@ -49,6 +51,7 @@ public class ProgressController {
         Progress progress = progressService.levelUp(userId);
         return ResponseEntity.ok(progress);
     }
+
     // (Participant, System) → tăng streak khi user login
     @PreAuthorize("hasRole('PARTICIPANT')")
     @PostMapping("/{userId}/streaks/increase")
@@ -56,6 +59,7 @@ public class ProgressController {
         Progress progress = progressService.increaseStreak(userId);
         return ResponseEntity.ok(progress);
     }
+
     // (Admin) → reset streak
     @PreAuthorize("hasAnyRole('CONSULTANT_ADMIN','CLIENT_ADMIN')")
     @PostMapping("/{userId}/streaks/reset")

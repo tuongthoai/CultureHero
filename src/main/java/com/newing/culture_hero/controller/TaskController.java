@@ -16,6 +16,7 @@ import java.util.UUID;
 public class TaskController {
 
     private final TaskService taskService;
+
     @Autowired
     public TaskController(TaskService taskService) {
         this.taskService = taskService;
@@ -29,10 +30,10 @@ public class TaskController {
                 taskRequest.getDescription(),
                 taskRequest.getRewardXp(),
                 taskRequest.getRewardCoins(),
-                taskRequest.getDifficulty()
-        );
+                taskRequest.getDifficulty());
         return ResponseEntity.status(HttpStatus.CREATED).body(task);
     }
+
     @PreAuthorize("hasAnyRole('CONSULTANT_ADMIN','CLIENT_ADMIN','PARTICIPANT')")
     @GetMapping
     public ResponseEntity<List<Task>> getTasks() {
@@ -58,8 +59,7 @@ public class TaskController {
                 taskRequest.getRewardXp(),
                 taskRequest.getRewardCoins(),
                 taskRequest.getDifficulty(),
-                taskRequest.getStatus()
-        );
+                taskRequest.getStatus());
         return ResponseEntity.ok(updated);
     }
 

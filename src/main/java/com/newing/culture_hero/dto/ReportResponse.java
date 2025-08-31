@@ -3,6 +3,7 @@ package com.newing.culture_hero.dto;
 public class ReportResponse {
     private String metric;
     private double value;
+
     public ReportResponse(String metric, double value) {
         this.metric = metric;
         this.value = value;

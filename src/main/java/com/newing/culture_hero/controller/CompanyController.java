@@ -15,16 +15,19 @@ import java.util.UUID;
 @RequestMapping("/api/v1/companies")
 public class CompanyController {
     private final CompanyService companyService;
+
     @Autowired
     public CompanyController(CompanyService companyService) {
         this.companyService = companyService;
     }
+
     @PreAuthorize("hasAnyRole('CONSULTANT_ADMIN')")
     @GetMapping
     public ResponseEntity<List<Company>> getCompanies() {
         List<Company> companies = companyService.findAll();
         return ResponseEntity.ok(companies);
     }
+
     @PreAuthorize("hasRole('CONSULTANT_ADMIN')")
     @PostMapping("/create")
     public ResponseEntity<Company> createCompany(@RequestBody Company companyRequest) {
@@ -33,10 +36,10 @@ public class CompanyController {
                 companyRequest.getName(),
                 companyRequest.getEmail(),
                 companyRequest.getPhone(),
-                companyRequest.getAddress()
-        );
+                companyRequest.getAddress());
         return ResponseEntity.status(HttpStatus.CREATED).body(company);
     }
+
     @PreAuthorize("hasRole('CLIENT_ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<Company> getCompanyById(@PathVariable UUID id) {
@@ -45,6 +48,7 @@ public class CompanyController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+
     @PreAuthorize("hasRole('CLIENT_ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<Company> updateCompany(
@@ -56,8 +60,7 @@ public class CompanyController {
                 companyRequest.getEmail(),
                 companyRequest.getPhone(),
                 companyRequest.getAddress(),
-                companyRequest.getStatus()
-        );
+                companyRequest.getStatus());
         return ResponseEntity.ok(updatedCompany);
     }
 

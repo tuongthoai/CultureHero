@@ -27,7 +27,7 @@ public class UserService {
         if (userRepository.findByUsername(username).isPresent()) {
             throw new UsernameAlreadyExistsException("Username '" + username + "' already exists");
         }
-        
+
         User user = new User();
         user.setId(UUID.randomUUID());
         user.setCompanyId(companyId);

@@ -10,6 +10,7 @@ public class CertificateResponse {
     private String status;
     private LocalDateTime requestedAt;
     private String username;
+
     public CertificateResponse(Certificate cert) {
         this.id = cert.getId();
         this.status = cert.getStatus().name();

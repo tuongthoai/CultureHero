@@ -7,13 +7,13 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name="certificates")
+@Table(name = "certificates")
 public class Certificate {
     @Id
     private UUID id;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
     private User user;
 
     @Enumerated(EnumType.STRING)
@@ -33,7 +33,9 @@ public class Certificate {
 
     public Certificate() {
     }
-    public Certificate(UUID id, User user, CertificateStatus status, LocalDateTime requestedAt, LocalDateTime approvedAt, LocalDateTime rejectedAt, String reason) {
+
+    public Certificate(UUID id, User user, CertificateStatus status, LocalDateTime requestedAt,
+            LocalDateTime approvedAt, LocalDateTime rejectedAt, String reason) {
         this.id = id;
         this.user = user;
         this.status = status;
@@ -42,6 +44,7 @@ public class Certificate {
         this.rejectedAt = rejectedAt;
         this.reason = reason;
     }
+
     public Certificate(User user, CertificateStatus status) {
         this.id = UUID.randomUUID();
         this.user = user;

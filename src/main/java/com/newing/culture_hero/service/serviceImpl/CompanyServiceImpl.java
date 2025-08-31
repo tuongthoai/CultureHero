@@ -11,14 +11,16 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
 @Service
 public class CompanyServiceImpl implements CompanyService {
-    private  final CompanyRepository companyRepository;
+    private final CompanyRepository companyRepository;
 
     @Autowired
     public CompanyServiceImpl(CompanyRepository companyRepository) {
         this.companyRepository = companyRepository;
     }
+
     @Override
     @Transactional
     public Company createCompany(String code, String name, String email, String phone, String address) {

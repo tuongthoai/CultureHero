@@ -20,13 +20,12 @@ public class GlobalExceptionHandler {
         response.put("title", "Validation Failed");
         response.put("status", 400);
         response.put("detail", "Request validation failed");
-        
+
         Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getFieldErrors().forEach(error ->
-            errors.put(error.getField(), error.getDefaultMessage())
-        );
+        ex.getBindingResult().getFieldErrors()
+                .forEach(error -> errors.put(error.getField(), error.getDefaultMessage()));
         response.put("errors", errors);
-        
+
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
 
@@ -37,7 +36,7 @@ public class GlobalExceptionHandler {
         response.put("title", "Conflict");
         response.put("status", 409);
         response.put("detail", "Username already exists");
-        
+
         return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
     }
 }

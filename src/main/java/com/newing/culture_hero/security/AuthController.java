@@ -32,9 +32,9 @@ public class AuthController {
     private final UserTokenService userTokenService;
 
     @Autowired
-    public AuthController(AuthenticationManager authenticationManager, 
-                         UserService userService, 
-                         PasswordEncoder passwordEncoder,UserTokenService userTokenService) {
+    public AuthController(AuthenticationManager authenticationManager,
+            UserService userService,
+            PasswordEncoder passwordEncoder, UserTokenService userTokenService) {
         this.userTokenService = userTokenService;
         this.authenticationManager = authenticationManager;
         this.userService = userService;
@@ -48,9 +48,7 @@ public class AuthController {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
                             loginRequest.getUsername(),
-                            loginRequest.getPassword()
-                    )
-            );
+                            loginRequest.getPassword()));
 
             // Get user details
             User user = userService.findByUsername(loginRequest.getUsername());
@@ -68,8 +66,8 @@ public class AuthController {
                     user.getUsername(),
                     user.getRole(),
                     user.getCompanyId().toString(),
-                    access.getCreatedAt().format(fmt),   // issuedAt
-                    access.getExpiresAt().format(fmt)    // expiresAt
+                    access.getCreatedAt().format(fmt), // issuedAt
+                    access.getExpiresAt().format(fmt) // expiresAt
             );
             return ResponseEntity.ok(response);
         } catch (Exception e) {
@@ -78,7 +76,7 @@ public class AuthController {
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<String> logout(@RequestHeader(name = "Authorization", required = false)String authHeader) {
+    public ResponseEntity<String> logout(@RequestHeader(name = "Authorization", required = false) String authHeader) {
         String token = null;
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             token = authHeader.substring(7).trim();
@@ -100,8 +98,10 @@ public class AuthController {
         }
         return ResponseEntity.status(401).body("Not authenticated");
     }
+
     private String extractBearerToken(String header) {
-        if (header == null) return null;
+        if (header == null)
+            return null;
         String h = header.trim();
         if (h.length() >= 7 && h.regionMatches(true, 0, "Bearer ", 0, 7)) {
             return h.substring(7).trim();

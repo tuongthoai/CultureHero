@@ -12,8 +12,9 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/leaderboard")
-public class    LeaderboardController {
+public class LeaderboardController {
     private final LeaderboardService leaderboardService;
+
     public LeaderboardController(LeaderboardService leaderboardService) {
         this.leaderboardService = leaderboardService;
     }

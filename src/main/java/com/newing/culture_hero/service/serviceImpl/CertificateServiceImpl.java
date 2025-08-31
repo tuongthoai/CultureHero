@@ -24,6 +24,7 @@ public class CertificateServiceImpl implements CertificateService {
         this.certificateRepository = certificateRepository;
         this.userService = userService;
     }
+
     @Override
     public List<Certificate> getAllCertificates() {
         return certificateRepository.findAll();
