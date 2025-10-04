@@ -14,7 +14,8 @@ import java.util.Map;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Map<String, Object>> handleValidationExceptions(MethodArgumentNotValidException ex) {
+    public ResponseEntity<Map<String, Object>> handleValidationExceptions(
+            MethodArgumentNotValidException ex) {
         Map<String, Object> response = new HashMap<>();
         response.put("type", "about:blank");
         response.put("title", "Validation Failed");
@@ -22,7 +23,8 @@ public class GlobalExceptionHandler {
         response.put("detail", "Request validation failed");
 
         Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getFieldErrors()
+        ex.getBindingResult()
+                .getFieldErrors()
                 .forEach(error -> errors.put(error.getField(), error.getDefaultMessage()));
         response.put("errors", errors);
 
@@ -30,7 +32,8 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(DataIntegrityViolationException.class)
-    public ResponseEntity<Map<String, Object>> handleDataIntegrityViolation(DataIntegrityViolationException ex) {
+    public ResponseEntity<Map<String, Object>> handleDataIntegrityViolation(
+            DataIntegrityViolationException ex) {
         Map<String, Object> response = new HashMap<>();
         response.put("type", "about:blank");
         response.put("title", "Conflict");

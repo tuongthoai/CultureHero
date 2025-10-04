@@ -1,13 +1,11 @@
 services:
   postgres:
     image: postgres:16.10
-    container_name: culturehero-postgres
+    container_name: pg
     environment:
       POSTGRES_DB: culturehero
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      # optional but nice to have:
-      PGDATA: /var/lib/postgresql/data/pgdata
     ports:
       - "5432:5432" # change to "5433:5432" if 5432 is busy on Windows
     volumes:

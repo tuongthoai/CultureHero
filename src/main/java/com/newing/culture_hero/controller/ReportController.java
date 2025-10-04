@@ -13,34 +13,34 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/reports")
 public class ReportController {
-  private final ReportService reportService;
+    private final ReportService reportService;
 
-  public ReportController(ReportService reportService) {
-    this.reportService = reportService;
-  }
+    public ReportController(ReportService reportService) {
+        this.reportService = reportService;
+    }
 
-  @GetMapping("/participation")
-  public ResponseEntity<ReportResponse> getParticipationRate() {
-    return ResponseEntity.ok(reportService.getParticipationRate());
-  }
+    @GetMapping("/participation")
+    public ResponseEntity<ReportResponse> getParticipationRate() {
+        return ResponseEntity.ok(reportService.getParticipationRate());
+    }
 
-  @GetMapping("/completion")
-  public ResponseEntity<ReportResponse> getCompletionRate() {
-    return ResponseEntity.ok(reportService.getCompletionRate());
-  }
+    @GetMapping("/completion")
+    public ResponseEntity<ReportResponse> getCompletionRate() {
+        return ResponseEntity.ok(reportService.getCompletionRate());
+    }
 
-  @GetMapping("/streaks")
-  public ResponseEntity<ReportResponse> getStreakRate() {
-    return ResponseEntity.ok(reportService.getStreakRate());
-  }
+    @GetMapping("/streaks")
+    public ResponseEntity<ReportResponse> getStreakRate() {
+        return ResponseEntity.ok(reportService.getStreakRate());
+    }
 
-  @GetMapping("/certificates")
-  public ResponseEntity<ReportResponse> getCertificateRate() {
-    return ResponseEntity.ok(reportService.getCertificateRate());
-  }
+    @GetMapping("/certificates")
+    public ResponseEntity<ReportResponse> getCertificateRate() {
+        return ResponseEntity.ok(reportService.getCertificateRate());
+    }
 
-  @GetMapping("/leaderboards")
-  public ResponseEntity<List<ReportResponse>> getLeaderboardStats() {
-    return ResponseEntity.ok(reportService.getLeaderboardStats());
-  }
+    @GetMapping("/leaderboards")
+    public ResponseEntity<List<ReportResponse>> getLeaderboardStats() {
+        return ResponseEntity.ok(reportService.getLeaderboardStats());
+    }
 }

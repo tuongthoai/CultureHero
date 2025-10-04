@@ -11,5 +11,4 @@ import java.util.UUID;
 @Repository
 public interface CertificateRepository extends JpaRepository<Certificate, UUID> {
     List<Certificate> findByUserId(UUID userId);
-
 }

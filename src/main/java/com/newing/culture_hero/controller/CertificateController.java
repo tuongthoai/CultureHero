@@ -25,10 +25,10 @@ public class CertificateController {
     @PreAuthorize("hasRole('CLIENT_ADMIN')")
     @GetMapping("/all")
     public ResponseEntity<List<CertificateResponse>> getAllCertificates() {
-        List<CertificateResponse> responses = certificateService.getAllCertificates()
-                .stream()
-                .map(CertificateResponse::new)
-                .toList();
+        List<CertificateResponse> responses =
+                certificateService.getAllCertificates().stream()
+                        .map(CertificateResponse::new)
+                        .toList();
         return ResponseEntity.ok(responses);
     }
 
@@ -46,8 +46,8 @@ public class CertificateController {
 
     @PreAuthorize("hasRole('CLIENT_ADMIN')")
     @PostMapping("/{id}/reject")
-    public ResponseEntity<Certificate> rejectCertificate(@PathVariable UUID id,
-            @RequestParam(required = false) String reason) {
+    public ResponseEntity<Certificate> rejectCertificate(
+            @PathVariable UUID id, @RequestParam(required = false) String reason) {
         return ResponseEntity.ok(certificateService.rejectCertificate(id, reason));
     }
 }

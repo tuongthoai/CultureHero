@@ -1,4 +1,3 @@
-
 package com.newing.culture_hero.user;
 
 import jakarta.persistence.Column;

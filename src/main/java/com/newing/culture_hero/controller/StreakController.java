@@ -29,5 +29,4 @@ public class StreakController {
     public ResponseEntity<Streak> incrementStreak(@PathVariable UUID userId) {
         return ResponseEntity.ok(streakService.incrementStreak(userId));
     }
-
 }

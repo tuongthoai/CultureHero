@@ -10,23 +10,27 @@ import java.util.UUID;
 
 public interface TaskService {
 
-  Task createTask(
-      String title, String description, int rewardXp, int rewardCoins, TaskDifficulty difficulty);
+    Task createTask(
+            String title,
+            String description,
+            int rewardXp,
+            int rewardCoins,
+            TaskDifficulty difficulty);
 
-  List<Task> findAll();
+    List<Task> findAll();
 
-  Optional<Task> findById(UUID id);
+    Optional<Task> findById(UUID id);
 
-  List<Task> findByStatus(TaskStatus status);
+    List<Task> findByStatus(TaskStatus status);
 
-  Task updateTask(
-      UUID id,
-      String title,
-      String description,
-      int rewardXp,
-      int rewardCoins,
-      TaskDifficulty difficulty,
-      TaskStatus status);
+    Task updateTask(
+            UUID id,
+            String title,
+            String description,
+            int rewardXp,
+            int rewardCoins,
+            TaskDifficulty difficulty,
+            TaskStatus status);
 
-  void deleteTask(UUID id);
+    void deleteTask(UUID id);
 }

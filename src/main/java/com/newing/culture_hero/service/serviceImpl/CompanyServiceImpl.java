@@ -24,7 +24,8 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     @Transactional
-    public Company createCompany(String code, String name, String email, String phone, String address) {
+    public Company createCompany(
+            String code, String name, String email, String phone, String address) {
         if (companyRepository.existsByCode(code)) {
             throw new RuntimeException("Company code already exists: " + code);
         }
@@ -58,9 +59,12 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     @Transactional
-    public Company updateCompany(UUID id, String name, String email, String phone, String address, String status) {
-        Company company = companyRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Company not found: " + id));
+    public Company updateCompany(
+            UUID id, String name, String email, String phone, String address, String status) {
+        Company company =
+                companyRepository
+                        .findById(id)
+                        .orElseThrow(() -> new RuntimeException("Company not found: " + id));
         company.setName(name);
         company.setEmail(email);
         company.setPhone(phone);

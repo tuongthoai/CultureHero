@@ -32,12 +32,13 @@ public class CompanyController {
     @PreAuthorize("hasRole('CONSULTANT_ADMIN')")
     @PostMapping("/create")
     public ResponseEntity<Company> createCompany(@RequestBody Company companyRequest) {
-        Company company = companyService.createCompany(
-                companyRequest.getCode(),
-                companyRequest.getName(),
-                companyRequest.getEmail(),
-                companyRequest.getPhone(),
-                companyRequest.getAddress());
+        Company company =
+                companyService.createCompany(
+                        companyRequest.getCode(),
+                        companyRequest.getName(),
+                        companyRequest.getEmail(),
+                        companyRequest.getPhone(),
+                        companyRequest.getAddress());
         return ResponseEntity.status(HttpStatus.CREATED).body(company);
     }
 
@@ -45,7 +46,8 @@ public class CompanyController {
     @GetMapping("/{id}")
     public ResponseEntity<Company> getCompanyById(@PathVariable UUID id) {
         UUID uuid = UUID.fromString(String.valueOf(id));
-        return companyService.findById(uuid)
+        return companyService
+                .findById(uuid)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -53,15 +55,15 @@ public class CompanyController {
     @PreAuthorize("hasRole('CLIENT_ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<Company> updateCompany(
-            @PathVariable UUID id,
-            @RequestBody Company companyRequest) {
-        Company updatedCompany = companyService.updateCompany(
-                id,
-                companyRequest.getName(),
-                companyRequest.getEmail(),
-                companyRequest.getPhone(),
-                companyRequest.getAddress(),
-                companyRequest.getStatus());
+            @PathVariable UUID id, @RequestBody Company companyRequest) {
+        Company updatedCompany =
+                companyService.updateCompany(
+                        id,
+                        companyRequest.getName(),
+                        companyRequest.getEmail(),
+                        companyRequest.getPhone(),
+                        companyRequest.getAddress(),
+                        companyRequest.getStatus());
         return ResponseEntity.ok(updatedCompany);
     }
 
@@ -71,5 +73,4 @@ public class CompanyController {
         companyService.deleteCompany(id);
         return ResponseEntity.noContent().build();
     }
-
 }

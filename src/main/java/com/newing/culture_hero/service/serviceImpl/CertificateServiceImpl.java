@@ -21,7 +21,8 @@ public class CertificateServiceImpl implements CertificateService {
     private final UserService userService;
 
     @Autowired
-    public CertificateServiceImpl(CertificateRepository certificateRepository, UserService userService) {
+    public CertificateServiceImpl(
+            CertificateRepository certificateRepository, UserService userService) {
         this.certificateRepository = certificateRepository;
         this.userService = userService;
     }
@@ -50,8 +51,10 @@ public class CertificateServiceImpl implements CertificateService {
     @Override
     @Transactional
     public Certificate approveCertificate(UUID certificateId) {
-        Certificate cert = certificateRepository.findById(certificateId)
-                .orElseThrow(() -> new IllegalArgumentException("Certificate not found"));
+        Certificate cert =
+                certificateRepository
+                        .findById(certificateId)
+                        .orElseThrow(() -> new IllegalArgumentException("Certificate not found"));
         cert.setStatus(CertificateStatus.APPROVED);
         cert.setApprovedAt(LocalDateTime.now());
         return certificateRepository.save(cert);
@@ -60,8 +63,10 @@ public class CertificateServiceImpl implements CertificateService {
     @Override
     @Transactional
     public Certificate rejectCertificate(UUID certificateId, String reason) {
-        Certificate cert = certificateRepository.findById(certificateId)
-                .orElseThrow(() -> new IllegalArgumentException("Certificate not found"));
+        Certificate cert =
+                certificateRepository
+                        .findById(certificateId)
+                        .orElseThrow(() -> new IllegalArgumentException("Certificate not found"));
         cert.setStatus(CertificateStatus.REJECTED);
         cert.setRejectedAt(LocalDateTime.now());
         cert.setReason(reason);

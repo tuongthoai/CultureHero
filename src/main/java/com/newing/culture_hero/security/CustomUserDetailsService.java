@@ -2,6 +2,7 @@ package com.newing.culture_hero.security;
 
 import com.newing.culture_hero.user.User;
 import com.newing.culture_hero.user.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

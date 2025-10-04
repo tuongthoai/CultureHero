@@ -10,8 +10,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "progress")
 public class Progress {
-    @Id
-    private UUID id;
+    @Id private UUID id;
 
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false, unique = true)
@@ -35,11 +34,17 @@ public class Progress {
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
 
-    public Progress() {
-    }
+    public Progress() {}
 
-    public Progress(UUID id, User user, int xp, int level, int streak, LocalDateTime lastStreakDate,
-            LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public Progress(
+            UUID id,
+            User user,
+            int xp,
+            int level,
+            int streak,
+            LocalDateTime lastStreakDate,
+            LocalDateTime createdAt,
+            LocalDateTime updatedAt) {
         this.id = id;
         this.user = user;
         this.xp = xp;

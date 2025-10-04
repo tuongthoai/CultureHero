@@ -11,19 +11,19 @@ import java.util.UUID;
 
 @Service
 public class LeaderboardServiceImpl implements LeaderboardService {
-  private final LeaderBoardRepository leaderBoardRepository;
+    private final LeaderBoardRepository leaderBoardRepository;
 
-  public LeaderboardServiceImpl(LeaderBoardRepository leaderBoardRepository) {
-    this.leaderBoardRepository = leaderBoardRepository;
-  }
+    public LeaderboardServiceImpl(LeaderBoardRepository leaderBoardRepository) {
+        this.leaderBoardRepository = leaderBoardRepository;
+    }
 
-  @Override
-  public List<LeaderboardEntry> getGlobalLeaderboard() {
-    return leaderBoardRepository.getGlobalLeaderboard();
-  }
+    @Override
+    public List<LeaderboardEntry> getGlobalLeaderboard() {
+        return leaderBoardRepository.getGlobalLeaderboard();
+    }
 
-  @Override
-  public List<LeaderboardEntry> getCompanyLeaderboard(UUID companyId) {
-    return leaderBoardRepository.getCompanyLeaderboard(companyId);
-  }
+    @Override
+    public List<LeaderboardEntry> getCompanyLeaderboard(UUID companyId) {
+        return leaderBoardRepository.getCompanyLeaderboard(companyId);
+    }
 }

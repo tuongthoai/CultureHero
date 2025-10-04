@@ -31,9 +31,11 @@ public class AuthController {
     private UserToken userToken;
 
     @Autowired
-    public AuthController(AuthenticationManager authenticationManager,
+    public AuthController(
+            AuthenticationManager authenticationManager,
             UserService userService,
-            PasswordEncoder passwordEncoder, UserTokenService userTokenService) {
+            PasswordEncoder passwordEncoder,
+            UserTokenService userTokenService) {
         this.userTokenService = userTokenService;
         this.authenticationManager = authenticationManager;
         this.userService = userService;
@@ -44,10 +46,10 @@ public class AuthController {
     public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest loginRequest) {
         try {
             // Authenticate the user
-            Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(
-                            loginRequest.getUsername(),
-                            loginRequest.getPassword()));
+            Authentication authentication =
+                    authenticationManager.authenticate(
+                            new UsernamePasswordAuthenticationToken(
+                                    loginRequest.getUsername(), loginRequest.getPassword()));
 
             // Get user details
             User user = userService.findByUsername(loginRequest.getUsername());
@@ -60,14 +62,15 @@ public class AuthController {
             UserToken access = userTokenService.createAccessToken(user);
 
             DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            LoginResponse response = new LoginResponse(
-                    access.getToken(),
-                    user.getUsername(),
-                    user.getRole(),
-                    user.getCompanyId().toString(),
-                    access.getCreatedAt().format(fmt), // issuedAt
-                    access.getExpiresAt().format(fmt) // expiresAt
-            );
+            LoginResponse response =
+                    new LoginResponse(
+                            access.getToken(),
+                            user.getUsername(),
+                            user.getRole(),
+                            user.getCompanyId().toString(),
+                            access.getCreatedAt().format(fmt), // issuedAt
+                            access.getExpiresAt().format(fmt) // expiresAt
+                            );
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
@@ -75,7 +78,8 @@ public class AuthController {
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<String> logout(@RequestHeader(name = "Authorization", required = false) String authHeader) {
+    public ResponseEntity<String> logout(
+            @RequestHeader(name = "Authorization", required = false) String authHeader) {
         String token = null;
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             token = authHeader.substring(7).trim();
@@ -99,8 +103,7 @@ public class AuthController {
     }
 
     private String extractBearerToken(String header) {
-        if (header == null)
-            return null;
+        if (header == null) return null;
         String h = header.trim();
         if (h.length() >= 7 && h.regionMatches(true, 0, "Bearer ", 0, 7)) {
             return h.substring(7).trim();

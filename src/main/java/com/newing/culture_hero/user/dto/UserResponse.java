@@ -7,18 +7,15 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public class UserResponse {
-    @NotNull
-    private String id;
+    @NotNull private String id;
 
-    @NotNull
-    private String companyId;
+    @NotNull private String companyId;
 
     @NotBlank
     @Size(min = 3, max = 50)
     private String username;
 
-    @NotNull
-    private Role role;
+    @NotNull private Role role;
 
     private String createdAt;
     private String updatedAt;

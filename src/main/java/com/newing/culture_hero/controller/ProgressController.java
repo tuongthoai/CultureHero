@@ -33,15 +33,13 @@ public class ProgressController {
     @GetMapping("/{userId}")
     public ResponseEntity<Progress> getProgress(@PathVariable UUID userId) {
         Optional<Progress> progress = progressService.getProgressByUserId(userId);
-        return progress.map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        return progress.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
     // (Admin) → cộng XP cho user
     @PreAuthorize("hasAnyRole('CONSULTANT_ADMIN','CLIENT_ADMIN')")
     @PostMapping("/{userId}/add-xp")
-    public ResponseEntity<Progress> addXp(@PathVariable UUID userId,
-            @RequestParam int amount) {
+    public ResponseEntity<Progress> addXp(@PathVariable UUID userId, @RequestParam int amount) {
         Progress progress = progressService.addXp(userId, amount);
         return ResponseEntity.ok(progress);
     }
@@ -69,5 +67,4 @@ public class ProgressController {
         Progress progress = progressService.resetStreak(userId);
         return ResponseEntity.ok(progress);
     }
-
 }

@@ -41,8 +41,12 @@ public class UserController {
     public ResponseEntity<UserResponse> createUser(@Valid @RequestBody UserCreateRequest request) {
         try {
             UUID companyId = UUID.fromString(request.getCompanyId());
-            User user = userService.createUser(companyId, request.getUsername(), request.getPassword(),
-                    request.getRole());
+            User user =
+                    userService.createUser(
+                            companyId,
+                            request.getUsername(),
+                            request.getPassword(),
+                            request.getRole());
             return ResponseEntity.status(HttpStatus.CREATED).body(toResponse(user));
         } catch (UsernameAlreadyExistsException e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
@@ -61,21 +65,24 @@ public class UserController {
 
     @GetMapping
     @PreAuthorize("@authorizationService.canManageUsers()")
-    public ResponseEntity<List<UserResponse>> getAllUsers(@RequestParam(required = false) UUID companyId) {
+    public ResponseEntity<List<UserResponse>> getAllUsers(
+            @RequestParam(required = false) UUID companyId) {
         List<User> users;
 
         if (authorizationService.isConsultantAdmin()) {
             // Consultant admins can see all users or filter by company
-            users = (companyId != null) ? userService.findByCompanyId(companyId) : userService.findAll();
+            users =
+                    (companyId != null)
+                            ? userService.findByCompanyId(companyId)
+                            : userService.findAll();
         } else {
             // Client admins can only see users from their company
             User currentUser = authorizationService.getCurrentUser();
             users = userService.findByCompanyId(currentUser.getCompanyId());
         }
 
-        List<UserResponse> response = users.stream()
-                .map(this::toResponse)
-                .collect(Collectors.toList());
+        List<UserResponse> response =
+                users.stream().map(this::toResponse).collect(Collectors.toList());
 
         return ResponseEntity.ok(response);
     }
@@ -104,7 +111,8 @@ public class UserController {
         }
 
         // Additional company-level access check for non-consultant admins
-        if (!authorizationService.isConsultantAdmin() && !authorizationService.canAccessCompany(user.getCompanyId())) {
+        if (!authorizationService.isConsultantAdmin()
+                && !authorizationService.canAccessCompany(user.getCompanyId())) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
 

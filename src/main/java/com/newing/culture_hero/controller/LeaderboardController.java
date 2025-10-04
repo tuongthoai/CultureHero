@@ -15,21 +15,21 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v1/leaderboard")
 public class LeaderboardController {
-  private final LeaderboardService leaderboardService;
+    private final LeaderboardService leaderboardService;
 
-  public LeaderboardController(LeaderboardService leaderboardService) {
-    this.leaderboardService = leaderboardService;
-  }
+    public LeaderboardController(LeaderboardService leaderboardService) {
+        this.leaderboardService = leaderboardService;
+    }
 
-  @GetMapping("/global")
-  public ResponseEntity<List<LeaderboardEntry>> getGlobalLeaderboard() {
-    List<LeaderboardEntry> leaderboard = leaderboardService.getGlobalLeaderboard();
-    return ResponseEntity.ok(leaderboard);
-  }
+    @GetMapping("/global")
+    public ResponseEntity<List<LeaderboardEntry>> getGlobalLeaderboard() {
+        List<LeaderboardEntry> leaderboard = leaderboardService.getGlobalLeaderboard();
+        return ResponseEntity.ok(leaderboard);
+    }
 
-  @GetMapping("/company/{companyId}")
-  public ResponseEntity<List<LeaderboardEntry>> getCompanyLeaderboard(
-      @PathVariable UUID companyId) {
-    return ResponseEntity.ok(leaderboardService.getCompanyLeaderboard(companyId));
-  }
+    @GetMapping("/company/{companyId}")
+    public ResponseEntity<List<LeaderboardEntry>> getCompanyLeaderboard(
+            @PathVariable UUID companyId) {
+        return ResponseEntity.ok(leaderboardService.getCompanyLeaderboard(companyId));
+    }
 }

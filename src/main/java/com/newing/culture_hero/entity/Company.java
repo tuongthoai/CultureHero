@@ -11,32 +11,48 @@ import java.util.UUID;
 @Entity
 @Table(name = "companies")
 public class Company {
-    @Id
-    private UUID id;
+    @Id private UUID id;
+
     @Column(name = "code", nullable = false, unique = true)
     private String code;
+
     @Column(name = "name", nullable = false)
     private String name;
+
     @Column(name = "email", nullable = false, unique = true)
     private String email;
+
     @Column(name = "phone", nullable = false, length = 11)
     private String phone;
+
     @Column(name = "address", nullable = false)
     private String address;
+
     @Column(name = "status", nullable = false)
     private String status;
+
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
+
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
+
     @Column(name = "deleted_at")
     private LocalDateTime deletedAt;
 
-    public Company() {
-    }
+    public Company() {}
 
-    public Company(UUID id, String code, String name, String email, String phone, String address, String status,
-            LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public Company(
+            UUID id,
+            String code,
+            String name,
+            String email,
+            String phone,
+            String address,
+            String status,
+            LocalDateTime createdAt,
+            LocalDateTime updatedAt,
+            LocalDateTime deletedAt) {
         this.id = id;
         this.code = code;
         this.name = name;
