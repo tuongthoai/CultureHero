@@ -8,37 +8,20 @@ public class EnrichableException extends RuntimeException {
 
     protected List<InfoItem> infoItems = new ArrayList<InfoItem>();
 
-    protected class InfoItem {
-        public String errorContext = null;
-        public String errorCode = null;
-        public String errorText = null;
-
-        public InfoItem(String contextCode, String errorCode,
-                String errorText) {
-
-            this.errorContext = contextCode;
-            this.errorCode = errorCode;
-            this.errorText = errorText;
-        }
-    }
-
-    public EnrichableException(String errorContext, String errorCode,
-            String errorMessage) {
+    public EnrichableException(String errorContext, String errorCode, String errorMessage) {
 
         addInfo(errorContext, errorCode, errorMessage);
     }
 
-    public EnrichableException(String errorContext, String errorCode,
-            String errorMessage, Throwable cause) {
+    public EnrichableException(
+            String errorContext, String errorCode, String errorMessage, Throwable cause) {
         super(cause);
         addInfo(errorContext, errorCode, errorMessage);
     }
 
-    public EnrichableException addInfo(
-            String errorContext, String errorCode, String errorText) {
+    public EnrichableException addInfo(String errorContext, String errorCode, String errorText) {
 
-        this.infoItems.add(
-                new InfoItem(errorContext, errorCode, errorText));
+        this.infoItems.add(new InfoItem(errorContext, errorCode, errorText));
         return this;
     }
 
@@ -72,8 +55,7 @@ public class EnrichableException extends RuntimeException {
             builder.append(info.errorCode);
             builder.append(']');
             builder.append(info.errorText);
-            if (i > 0)
-                builder.append('\n');
+            if (i > 0) builder.append('\n');
         }
 
         // append root causes and text from this exception first.
@@ -90,13 +72,23 @@ public class EnrichableException extends RuntimeException {
         return builder.toString();
     }
 
-    private void appendException(
-            StringBuilder builder, Throwable throwable) {
-        if (throwable == null)
-            return;
+    private void appendException(StringBuilder builder, Throwable throwable) {
+        if (throwable == null) return;
         appendException(builder, throwable.getCause());
         builder.append(throwable.toString());
         builder.append('\n');
     }
 
+    protected class InfoItem {
+        public String errorContext = null;
+        public String errorCode = null;
+        public String errorText = null;
+
+        public InfoItem(String contextCode, String errorCode, String errorText) {
+
+            this.errorContext = contextCode;
+            this.errorCode = errorCode;
+            this.errorText = errorText;
+        }
+    }
 }

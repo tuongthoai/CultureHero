@@ -1,12 +1,14 @@
-CREATE TABLE users (
-    id UUID PRIMARY KEY,
-    company_id UUID NOT NULL,
-    username VARCHAR(50) NOT NULL UNIQUE,
-    password VARCHAR(100) NOT NULL,
-    role VARCHAR(20) NOT NULL,
+CREATE TABLE users
+(
+    id         UUID PRIMARY KEY,
+    company_id UUID         NOT NULL,
+    username   VARCHAR(50)  NOT NULL UNIQUE,
+    password   VARCHAR(100) NOT NULL,
+    role       VARCHAR(20)  NOT NULL,
     created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     updated_at TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     deleted_at TIMESTAMP WITHOUT TIME ZONE
 );
 
-ALTER TABLE users ADD CONSTRAINT role_check CHECK (role IN ('CONSULTANT_ADMIN', 'CLIENT_ADMIN', 'PARTICIPANT'));
+ALTER TABLE users
+    ADD CONSTRAINT role_check CHECK (role IN ('CONSULTANT_ADMIN', 'CLIENT_ADMIN', 'PARTICIPANT'));

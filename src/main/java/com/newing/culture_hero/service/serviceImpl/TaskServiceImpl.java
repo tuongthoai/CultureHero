@@ -24,7 +24,12 @@ public class TaskServiceImpl implements TaskService {
 
     @Transactional
     @Override
-    public Task createTask(String title, String description, int rewardXp, int rewardCoins, TaskDifficulty difficulty) {
+    public Task createTask(
+            String title,
+            String description,
+            int rewardXp,
+            int rewardCoins,
+            TaskDifficulty difficulty) {
         Task task = new Task();
         task.setId(UUID.randomUUID());
         task.setTitle(title);
@@ -54,10 +59,18 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Task updateTask(UUID id, String title, String description, int rewardXp, int rewardCoins,
-            TaskDifficulty difficulty, TaskStatus status) {
-        Task task = taskRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Task not found: " + id));
+    public Task updateTask(
+            UUID id,
+            String title,
+            String description,
+            int rewardXp,
+            int rewardCoins,
+            TaskDifficulty difficulty,
+            TaskStatus status) {
+        Task task =
+                taskRepository
+                        .findById(id)
+                        .orElseThrow(() -> new RuntimeException("Task not found: " + id));
 
         task.setTitle(title);
         task.setDescription(description);

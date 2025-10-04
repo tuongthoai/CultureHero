@@ -2,6 +2,7 @@ package com.newing.culture_hero.repository;
 
 import com.newing.culture_hero.dto.LeaderboardEntry;
 import com.newing.culture_hero.user.User;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -11,7 +12,8 @@ import java.util.UUID;
 
 @Repository
 public interface LeaderBoardRepository extends CrudRepository<User, UUID> {
-    @Query("""
+    @Query(
+            """
                 SELECT new com.newing.culture_hero.dto.LeaderboardEntry(
                     u.id, u.username, u.companyId, SUM(p.xp)
                 )
@@ -22,7 +24,8 @@ public interface LeaderBoardRepository extends CrudRepository<User, UUID> {
             """)
     List<LeaderboardEntry> getGlobalLeaderboard();
 
-    @Query("""
+    @Query(
+            """
                 SELECT new com.newing.culture_hero.dto.LeaderboardEntry(
                     u.id, u.username, u.companyId, SUM(p.xp)
                 )

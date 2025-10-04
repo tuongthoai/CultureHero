@@ -5,12 +5,22 @@
 -- CREATE SCHEMA IF NOT EXISTS auth;
 -- CREATE SCHEMA IF NOT EXISTS tenant;
 -- Grant permissions
-GRANT ALL PRIVILEGES ON DATABASE culturehero TO postgres;
+GRANT
+ALL
+PRIVILEGES
+ON
+DATABASE
+culturehero TO postgres;
 
-create schema IF NOT EXISTS  culturehero;
+create schema IF NOT EXISTS culturehero;
 
-GRANT USAGE ON SCHEMA culturehero TO postgres;
+GRANT
+USAGE
+ON
+SCHEMA
+culturehero TO postgres;
 
 -- Optional: Create extensions if needed for UUID generation
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+CREATE
+EXTENSION IF NOT EXISTS "uuid-ossp";
 

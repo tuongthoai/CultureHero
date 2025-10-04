@@ -7,10 +7,11 @@ import com.newing.culture_hero.user.UserService;
 import com.newing.culture_hero.user.userToken.TokenType;
 import com.newing.culture_hero.user.userToken.UserToken;
 import com.newing.culture_hero.user.userToken.UserTokenService;
+
 import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -18,18 +19,16 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 @RestController
 @RequestMapping("/api/v1/auth")
 public class AuthController {
-    private UserToken userToken;
     private final AuthenticationManager authenticationManager;
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
     private final UserTokenService userTokenService;
+    private UserToken userToken;
 
     @Autowired
     public AuthController(AuthenticationManager authenticationManager,

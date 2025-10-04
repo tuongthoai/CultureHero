@@ -1,9 +1,11 @@
 package com.newing.culture_hero.user.userToken;
 
 import com.newing.culture_hero.user.User;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.security.SecureRandom;
 import java.time.LocalDateTime;
 import java.util.Base64;
@@ -12,8 +14,8 @@ import java.util.UUID;
 
 @Service
 public class UserTokenServiceImpl implements UserTokenService {
-    private final UserTokenRepository userTokenRepository;
     private static final SecureRandom SECURE_RANDOM = new SecureRandom();
+    private final UserTokenRepository userTokenRepository;
 
     @Autowired
     public UserTokenServiceImpl(UserTokenRepository userTokenRepository) {
@@ -37,12 +39,13 @@ public class UserTokenServiceImpl implements UserTokenService {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime expiresAt = now.plusHours(hoursValid);
 
-        UserToken token = new UserToken(
-                user,
-                generateTokenValue(type), // giá trị token
-                type,
-                now,
-                expiresAt);
+        UserToken token =
+                new UserToken(
+                        user,
+                        generateTokenValue(type), // giá trị token
+                        type,
+                        now,
+                        expiresAt);
         return userTokenRepository.save(token);
     }
 
@@ -89,5 +92,4 @@ public class UserTokenServiceImpl implements UserTokenService {
         String random = Base64.getUrlEncoder().withoutPadding().encodeToString(bytes);
         return (type == TokenType.ACCESS ? "acc_" : "ref_") + random;
     }
-
 }

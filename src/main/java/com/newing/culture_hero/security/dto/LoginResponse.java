@@ -11,6 +11,21 @@ public class LoginResponse {
     private String issuedAt;
     private String expiresAt;
 
+    public LoginResponse(
+            String accessToken,
+            String username,
+            Role role,
+            String companyId,
+            String issuedAt,
+            String expiresAt) {
+        this.accessToken = accessToken;
+        this.username = username;
+        this.role = role;
+        this.companyId = companyId;
+        this.issuedAt = issuedAt;
+        this.expiresAt = expiresAt;
+    }
+
     public String getIssuedAt() {
         return issuedAt;
     }
@@ -24,16 +39,6 @@ public class LoginResponse {
     }
 
     public void setExpiresAt(String expiresAt) {
-        this.expiresAt = expiresAt;
-    }
-
-    public LoginResponse(String accessToken, String username, Role role, String companyId, String issuedAt,
-            String expiresAt) {
-        this.accessToken = accessToken;
-        this.username = username;
-        this.role = role;
-        this.companyId = companyId;
-        this.issuedAt = issuedAt;
         this.expiresAt = expiresAt;
     }
 
@@ -76,5 +81,4 @@ public class LoginResponse {
     public void setCompanyId(String companyId) {
         this.companyId = companyId;
     }
-
 }

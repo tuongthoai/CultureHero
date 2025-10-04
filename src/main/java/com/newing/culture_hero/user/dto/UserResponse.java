@@ -1,9 +1,10 @@
 package com.newing.culture_hero.user.dto;
 
+import com.newing.culture_hero.user.Role;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import com.newing.culture_hero.user.Role;
 
 public class UserResponse {
     @NotNull

@@ -9,16 +9,17 @@ import java.util.UUID;
 @Entity
 @Table(name = "certificates")
 public class Certificate {
-    @Id
-    private UUID id;
+    @Id private UUID id;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
-    @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private User user;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     private CertificateStatus status; // REQUESTED, APPROVED, REJECTED
+
     @Column(name = "requested_at", nullable = false)
     private LocalDateTime requestedAt;
 
@@ -31,11 +32,16 @@ public class Certificate {
     @Column(name = "reason")
     private String reason; // lý do reject (nếu có)
 
-    public Certificate() {
-    }
+    public Certificate() {}
 
-    public Certificate(UUID id, User user, CertificateStatus status, LocalDateTime requestedAt,
-            LocalDateTime approvedAt, LocalDateTime rejectedAt, String reason) {
+    public Certificate(
+            UUID id,
+            User user,
+            CertificateStatus status,
+            LocalDateTime requestedAt,
+            LocalDateTime approvedAt,
+            LocalDateTime rejectedAt,
+            String reason) {
         this.id = id;
         this.user = user;
         this.status = status;

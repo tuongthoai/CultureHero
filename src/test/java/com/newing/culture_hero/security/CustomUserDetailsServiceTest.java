@@ -1,13 +1,15 @@
 package com.newing.culture_hero.security;
 
-import java.time.Instant;
-import java.util.UUID;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import com.newing.culture_hero.user.Role;
+import com.newing.culture_hero.user.User;
+import com.newing.culture_hero.user.UserRepository;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +20,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.newing.culture_hero.user.Role;
-import com.newing.culture_hero.user.User;
-import com.newing.culture_hero.user.UserRepository;
+import java.time.Instant;
+import java.util.UUID;
 
 @SpringBootTest
 @TestPropertySource(properties = {

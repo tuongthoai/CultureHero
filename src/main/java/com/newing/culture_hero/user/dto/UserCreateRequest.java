@@ -1,14 +1,13 @@
-
 package com.newing.culture_hero.user.dto;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
-import jakarta.validation.constraints.NotNull;
 import com.newing.culture_hero.user.Role;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 public class UserCreateRequest {
-    @NotNull
-    private String companyId;
+    @NotNull private String companyId;
 
     @NotBlank
     @Size(min = 3, max = 50)
@@ -18,8 +17,7 @@ public class UserCreateRequest {
     @Size(min = 8)
     private String password;
 
-    @NotNull
-    private Role role;
+    @NotNull private Role role;
 
     public String getCompanyId() {
         return companyId;

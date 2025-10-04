@@ -2,7 +2,8 @@
 
 ## 🎯 **Overview**
 
-I've successfully built a comprehensive authentication system for **all stakeholders** in the CultureHero application. The system supports role-based access control, multi-tenancy, and secure authentication for:
+I've successfully built a comprehensive authentication system for **all stakeholders** in the CultureHero application.
+The system supports role-based access control, multi-tenancy, and secure authentication for:
 
 - **Consultant Admins** - Full system access across all companies
 - **Client Admins** - Company-scoped user management
@@ -13,11 +14,13 @@ I've successfully built a comprehensive authentication system for **all stakehol
 ## 🏗️ **System Architecture**
 
 ### **Authentication Methods**
+
 1. ✅ **HTTP Basic Authentication** - For simple API access
 2. ✅ **Session-based Authentication** - Via login endpoints
 3. 🔄 **JWT Ready** - Infrastructure in place for token-based auth
 
 ### **Authorization Levels**
+
 1. ✅ **Role-based Access Control (RBAC)**
 2. ✅ **Multi-tenant Data Isolation**
 3. ✅ **Company-scoped Permissions**
@@ -30,7 +33,9 @@ I've successfully built a comprehensive authentication system for **all stakehol
 ### **Authentication Endpoints**
 
 #### **POST /api/v1/auth/login** - User Login
+
 **Purpose:** Authenticate users and get session token
+
 ```json
 {
   "username": "consultant_admin",
@@ -39,6 +44,7 @@ I've successfully built a comprehensive authentication system for **all stakehol
 ```
 
 **Response:**
+
 ```json
 {
   "accessToken": "session_uuid",
@@ -51,67 +57,80 @@ I've successfully built a comprehensive authentication system for **all stakehol
 ```
 
 #### **POST /api/v1/auth/logout** - User Logout
+
 **Purpose:** Clear user session
 **Response:** "Logged out successfully"
 
 #### **GET /api/v1/auth/validate** - Validate Authentication
+
 **Purpose:** Check if user is authenticated
 **Response:** "Authentication is valid" or 401 Unauthorized
 
 ### **User Management Endpoints**
 
 #### **POST /api/v1/users** - Create User
+
 **Access:** Public (no auth required)
 **Purpose:** Register new users
 
 #### **GET /api/v1/users/me** - Get Current User
+
 **Access:** Authenticated users
 **Purpose:** Get own user profile
 
 #### **GET /api/v1/users** - List All Users
+
 **Access:** Admin roles only (CONSULTANT_ADMIN, CLIENT_ADMIN)
-**Purpose:** 
+**Purpose:**
+
 - **Consultant Admins:** See all users across all companies
 - **Client Admins:** See only users from their company
 
 #### **GET /api/v1/users/{userId}** - Get User by ID
-**Access:** 
+
+**Access:**
+
 - **Self:** Users can access their own data
 - **Admins:** Can access users in their scope
-**Purpose:** Get specific user details with proper authorization checks
+  **Purpose:** Get specific user details with proper authorization checks
 
 ---
 
 ## 🔒 **Role-based Access Control**
 
 ### **CONSULTANT_ADMIN Powers:**
+
 ✅ Full system access across all companies  
 ✅ Can view/manage all users globally  
 ✅ Cross-company data access  
-✅ Complete administrative privileges  
+✅ Complete administrative privileges
 
 ### **CLIENT_ADMIN Powers:**
+
 ✅ Company-scoped user management  
 ✅ Can view/manage users within their company only  
 ✅ Administrative functions within company boundaries  
-❌ Cannot access other companies' data  
+❌ Cannot access other companies' data
 
 ### **PARTICIPANT Powers:**
+
 ✅ Self-service access to own profile  
 ✅ Can update own information  
 ❌ Cannot access other users' data  
-❌ No administrative functions  
+❌ No administrative functions
 
 ---
 
 ## 🏢 **Multi-tenancy Implementation**
 
 ### **Company Isolation:**
+
 - Every user belongs to a specific `companyId`
 - Data access is automatically scoped by company
 - Cross-company access only for Consultant Admins
 
 ### **Authorization Service:**
+
 - `canAccessCompany(companyId)` - Check company access
 - `canManageUsers()` - Check user management permissions
 - `isOwnerOrAdmin(username)` - Check data ownership
@@ -121,31 +140,36 @@ I've successfully built a comprehensive authentication system for **all stakehol
 ## 🛡️ **Security Features**
 
 ### **Password Security:**
+
 ✅ BCrypt hashing with strength 12  
 ✅ Minimum 8 character password policy  
-✅ Password validation on all endpoints  
+✅ Password validation on all endpoints
 
 ### **Session Management:**
+
 ✅ Secure session handling  
 ✅ Proper logout functionality  
-✅ Session validation endpoints  
+✅ Session validation endpoints
 
 ### **Input Validation:**
+
 ✅ Bean validation on all inputs  
 ✅ Username uniqueness enforcement  
-✅ Proper error handling with RFC7807 format  
+✅ Proper error handling with RFC7807 format
 
 ### **Authorization Checks:**
+
 ✅ Method-level security annotations  
 ✅ Multi-layered permission checks  
 ✅ Company-scoped data access  
-✅ Self-service data protection  
+✅ Self-service data protection
 
 ---
 
 ## 🧪 **Testing Coverage**
 
 ### **Comprehensive Test Suite:**
+
 - ✅ **13 Authentication Tests** - All stakeholder scenarios
 - ✅ **Login/Logout Functionality** - Success and failure cases
 - ✅ **Role-based Access Control** - All permission levels tested
@@ -158,6 +182,7 @@ I've successfully built a comprehensive authentication system for **all stakehol
 ## 📝 **Usage Examples**
 
 ### **1. Consultant Admin Login:**
+
 ```bash
 curl -X POST "http://localhost:8080/api/v1/auth/login" \
   -H "Content-Type: application/json" \
@@ -168,24 +193,28 @@ curl -X POST "http://localhost:8080/api/v1/auth/login" \
 ```
 
 ### **2. Get All Users (Consultant Admin):**
+
 ```bash
 curl -X GET "http://localhost:8080/api/v1/users" \
   -u "consultant_admin:password123"
 ```
 
 ### **3. Client Admin - Company-scoped Users:**
+
 ```bash
 curl -X GET "http://localhost:8080/api/v1/users" \
   -u "client_admin1:password123"
 ```
 
 ### **4. Participant - Own Profile:**
+
 ```bash
 curl -X GET "http://localhost:8080/api/v1/users/me" \
   -u "participant1:password123"
 ```
 
 ### **5. Get Specific User (with authorization):**
+
 ```bash
 curl -X GET "http://localhost:8080/api/v1/users/{userId}" \
   -u "client_admin1:password123"
@@ -204,6 +233,7 @@ curl -X GET "http://localhost:8080/api/v1/users/{userId}" \
 5. **UserService** - Extended with user management functions
 
 ### **Authorization Flow:**
+
 1. User authenticates via HTTP Basic or login endpoint
 2. System checks user role and company membership
 3. Authorization service validates permissions for each request
@@ -211,13 +241,13 @@ curl -X GET "http://localhost:8080/api/v1/users/{userId}" \
 
 ### **Permission Matrix:**
 
-| Endpoint | Consultant Admin | Client Admin | Participant |
-|----------|------------------|--------------|-------------|
-| POST /auth/login | ✅ | ✅ | ✅ |
-| GET /users | ✅ All users | ✅ Company users | ❌ |
-| GET /users/me | ✅ | ✅ | ✅ |
-| GET /users/{id} | ✅ Any user | ✅ Company user | ✅ Self only |
-| POST /users | ✅ | ✅ | ✅ |
+| Endpoint         | Consultant Admin | Client Admin    | Participant |
+|------------------|------------------|-----------------|-------------|
+| POST /auth/login | ✅                | ✅               | ✅           |
+| GET /users       | ✅ All users      | ✅ Company users | ❌           |
+| GET /users/me    | ✅                | ✅               | ✅           |
+| GET /users/{id}  | ✅ Any user       | ✅ Company user  | ✅ Self only |
+| POST /users      | ✅                | ✅               | ✅           |
 
 ---
 
@@ -230,7 +260,7 @@ curl -X GET "http://localhost:8080/api/v1/users/{userId}" \
 ✅ **Session Management** implemented  
 ✅ **Self-service Access** enabled for participants  
 ✅ **Company Isolation** enforced  
-✅ **Admin Privileges** properly scoped  
+✅ **Admin Privileges** properly scoped
 
 ---
 

@@ -1,6 +1,7 @@
 package com.newing.culture_hero.user.userToken;
 
 import com.newing.culture_hero.user.User;
+
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;

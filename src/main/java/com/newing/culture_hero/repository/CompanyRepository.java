@@ -1,6 +1,7 @@
 package com.newing.culture_hero.repository;
 
 import com.newing.culture_hero.entity.Company;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

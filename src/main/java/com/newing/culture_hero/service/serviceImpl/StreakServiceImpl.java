@@ -5,6 +5,7 @@ import com.newing.culture_hero.repository.StreakRepository;
 import com.newing.culture_hero.service.StreakService;
 import com.newing.culture_hero.user.User;
 import com.newing.culture_hero.user.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,16 +27,14 @@ public class StreakServiceImpl implements StreakService {
     @Override
     public Streak getUserStreak(UUID userId) {
         User user = userService.findById(userId);
-        return streakRepository.findByUser(user)
-                .orElse(new Streak(user));
+        return streakRepository.findByUser(user).orElse(new Streak(user));
     }
 
     @Override
     @Transactional
     public Streak incrementStreak(UUID userId) {
         User user = userService.findById(userId);
-        Streak streak = streakRepository.findByUser(user)
-                .orElse(new Streak(user));
+        Streak streak = streakRepository.findByUser(user).orElse(new Streak(user));
         LocalDate today = LocalDate.now();
         if (streak.getLastLoginDate().equals(today.minusDays(1))) {
             // login ngày liên tiếp

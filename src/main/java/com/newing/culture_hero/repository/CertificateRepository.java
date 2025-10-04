@@ -1,6 +1,7 @@
 package com.newing.culture_hero.repository;
 
 import com.newing.culture_hero.entity.Certificate;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
